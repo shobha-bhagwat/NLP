@@ -1,0 +1,28 @@
+Below are the negative reviews:
+
+Rating: 2.5
+
+Time: 2017-05-13 02:15:49 PM 
+
+Review: Ok ok place. Food was not so great, service was bad, they got all starters and main course together. Wouldn't recommend for a great fine dining experience as they mention
+
+Rating: 1
+
+Time: 2017-05-11 06:34:25 PM 
+
+Review: We ordered some chicken snacks and it was not fresh.We told them to replace , they refused to do the same and told us it is like that. They even put that in our bill. Really disappointed with the service .
+
+Rating: 1
+
+Time: 2017-05-07 10:10:41 PM 
+
+Review: Pathetic Service... Unresponsive staff.   Very careless towards customers... I order only for Biryani and they took 40 mins to serve... They are spoiling the name of Hyderabad Biryani....worst taste...
+
+
+
+Total reviews processed: 5
+
+Positive review count: 2
+
+Negative review count: 3
+

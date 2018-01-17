@@ -10,7 +10,6 @@ import email_func
 
 
 def my_job():
-    #subprocess.call("email_func.py", shell=True)
     email_func.main()
 
 

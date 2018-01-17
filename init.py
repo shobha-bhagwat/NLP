@@ -5,7 +5,6 @@ import configparser
 from configparser import ConfigParser
 from datetime import date
 
-
 # Function to read config file
 def ConfigSectionMap(section):
     dict1 = {}

@@ -79,7 +79,19 @@ def main():
 
         rating = data['user_reviews'][count]['review']['rating']
 
-        if rating < 4.5:
+        if rating <= 2.5:
+
+            neg_cnt = neg_cnt + 1
+            review = {}
+            review['rating'] = data['user_reviews'][count]['review']['rating']
+            review['timestamp'] = data['user_reviews'][count]['review']['timestamp']
+            review['review'] = data['user_reviews'][count]['review']['review_text']
+
+            neg_reviews["user_review"].append(review)   #dictionary to capture negative reviews from the overall list of reviews
+            flag = 1
+
+
+        elif rating < 4.5 and rating > 2.5:
     
             rvw = data['user_reviews'][count]['review']['review_text']
             word_list = rvw.split('\n')         #Split the sentences in the review text
@@ -121,7 +133,7 @@ def main():
                         else:
                             negative_counter = negative_counter + 1
                 
-                    pw = prev_w                                     # Word 2 back than current word, to check for words like ""
+                    pw = prev_w                                     # 2nd previous word than current word, to check for words like ""
                     prev_w = w                                      # Previous word to check for incrementers, decrementers & inverters
 
                 
@@ -134,33 +146,39 @@ def main():
                  review['timestamp'] = data['user_reviews'][count]['review']['timestamp']
                  review['review'] = data['user_reviews'][count]['review']['review_text']
 
-                 neg_reviews["user_review"].append(review)   #dict to capture negative reviews from the overall list of reviews
+                 neg_reviews["user_review"].append(review)   #dictionary to capture negative reviews from the overall list of reviews
                  flag = 1
 
     
         tot_cnt = tot_cnt + 1
         count = count + 1
-    
 
-    cnt = len(neg_reviews)
+    cnt = len(neg_reviews['user_review'])
 
     c = 0   #counter for index
 
     if flag == 1:
-
-        for c in range(0,cnt):          # This code is to manipulate new_reviews appropriately for including in mail body
+        
+        with open('log.txt','w') as log:
+            [log.write("Below are the negative reviews:\n\n")]
+                
+        for c in range(0,cnt):          # This code is to format new_reviews appropriately for including in mail body
             user_rvw = {}
             user_rvw['Rating'] = neg_reviews['user_review'][c]['rating']
             user_rvw['Time'] = datetime.datetime.fromtimestamp(int(neg_reviews['user_review'][c]['timestamp'])).strftime('%Y-%m-%d %I:%M:%S %p %Z')
             user_rvw['Review'] = neg_reviews['user_review'][c]['review']
 
-            with open('log.txt','w') as log:
-                [log.write("Below are the negative reviews:\n\n")]
+            with open('log.txt','a') as log:
                 [log.write("%s: %s\n\n" % (key,value)) for key, value in user_rvw.items()]
-                [log.write("\n\nTotal reviews processed: %s\n\n Positive review count: %s\n\n  Negative review count: %s\n\n" % (tot_cnt,neg_cnt,tot_cnt-neg_cnt))]
+        
 
+        with open('log.txt','a') as log:                
+                [log.write("\n\nTotal reviews processed: %s" % (tot_cnt))]
+                [log.write("\n\nPositive review count: %s" % (tot_cnt-neg_cnt))]
+                [log.write("\n\nNegative review count: %s\n\n" % (neg_cnt))]
 
-        sg = sendgrid.SendGridAPIClient(apikey=ConfigSectionMap("mail")['api_key'])
+        
+        sg = sendgrid.SendGridAPIClient(apikey=ConfigSectionMap("mail")['api_key'])    #This code is for sending the alert mail
         from_email = Email(ConfigSectionMap("mail")['from_email'])
         subject = "Received negative review on Zomato"
         to_email = Email(ConfigSectionMap("mail")['to_email'])
