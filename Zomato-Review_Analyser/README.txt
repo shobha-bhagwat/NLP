@@ -24,3 +24,6 @@ INSTRUCTIONS
 
 In order to schedule the script, run scheduler.py
 
+This script runs in the background and calls the main script email_func.py every 1 hour.
+
+Sample output email is also included here.
