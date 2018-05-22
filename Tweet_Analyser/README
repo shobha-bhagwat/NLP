@@ -1,1 +1,25 @@
-This project is about analysing Twitter data and doing sentiment analysis on the tweets using Python
+INTRODUCTION
+
+	This project is about analysing Twitter data and doing sentiment analysis on the tweets using Python. The python script uses 
+  OAuth to connect to Twitter and get the tweets. A basic website has been built using Flask which helps in connecting to Twitter,
+  provide a search box for user to be able to search tweets on any particular topic and reflect the analysed tweets. For positive 
+  sentiment, the tweets will be green in color, for negative sentiment they will be red in color and neutral tweets would be 
+  reflected in blue.
+  
+
+INITIALIZATION
+
+In order to setup the necessary code base for running the script, following steps need to be executed-
+
+1. Run the DDL dump 
+2. Setup the config.py and update the following and also any other parameters if needed -
+	a. host, database, user, password for PostgreSQL database connection
+  b. copy the positive-words.txt, negative-words.txt, incrementers.txt, decrementers.txt, inverters.txt
+	c. the file paths under [file_path] section to reflect wherever the files have been copied
+3. Create a folder called template and copy the .xml files into it
+4. All the python packages mentioned in requirements.txt should be installed
+
+
+INSTRUCTIONS
+
+In order to run the application, run the app.py script.
