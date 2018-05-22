@@ -3,6 +3,7 @@ from twitter_utils import get_request_token, get_oauth_verifier_url, get_access_
 from user import User
 from database import Database
 import config
+from sentiment_analyser import sentiment
 
 
 app = Flask(__name__)
@@ -65,9 +66,13 @@ def submit():
     text = request.form['text']
     query = text.lower()
     tweets = g.user.twitter_request('https://api.twitter.com/1.1/search/tweets.json?q={}'.format(query))
-    tweet_text = [tweet['text'] for tweet in tweets['statuses']]
+    tweet_texts = [{'tweet': tweet['text'], 'label': 'neutral'} for tweet in tweets['statuses']]
 
-    return render_template('search.html', content=tweet_text)
+    for tweet in tweet_texts:
+        tweet['tweet'] = '"""' + tweet['tweet'] + '"""'  # this is needed to handle multi-line tweets
+        tweet['label'] = sentiment(tweet['tweet'])
+
+    return render_template('search.html', content=tweet_texts)
 
 
 
