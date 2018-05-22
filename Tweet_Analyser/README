@@ -18,6 +18,9 @@ In order to setup the necessary code base for running the script, following step
 	c. the file paths under [file_path] section to reflect wherever the files have been copied
 3. Create a folder called template and copy the .xml files into it
 4. All the python packages mentioned in requirements.txt should be installed
+5. Create an app in Twitter at https://apps.twitter.com/ (Eg. Sentiment Analysis - Twitter) and get the consumer_key 
+and consumer_secret from the app settings and update in config.py. This Twitter app represents our app (Flask website) and 
+helps in connecting with Twitter
 
 
 INSTRUCTIONS
